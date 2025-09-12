@@ -21,7 +21,8 @@ void solve()
             int r3=((i/1000)%10);
             if(r!=r1&&r!=r2&&r!=r3&&r1!=r2&&r1!=r3&&r2!=r3)
             {
-                cout<<i;return;
+                cout<<i;
+                return;
             }
         }
 }

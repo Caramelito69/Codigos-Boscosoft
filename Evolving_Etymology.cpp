@@ -7,12 +7,12 @@ typedef long long ll;
 typedef unsigned long long ull;
 using namespace std;
 const ll m=1e9+7;
-long long expmod(long long base, long long exponente, long long modulo=m)
+ll expmod(ll base, ll exponente, ll modulo=m)
 {
     if (modulo==1)return 0;
     base%=modulo;
     if (base<0)base+=modulo;
-    long long resultado=1;
+    ll resultado=1;
     while (exponente>0)
     {
         if (exponente&1)

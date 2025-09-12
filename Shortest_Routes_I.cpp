@@ -23,7 +23,7 @@ vector<ll>dijkstra(int n,vector<vecpar>&vec,int ini=1)
         int u=cola.top().second;
         cola.pop();
         if(d>dist[u])continue;
-        for(const auto& e:vec[u])
+        for(auto& e:vec[u])
         {
             int v=e.first;ll uv=e.second;
             if(uv+dist[u]<dist[v])

@@ -23,7 +23,7 @@ void criba()
         if(esprimo[i/2])
         {
             if(i*i>1e12)break;
-            primos.push_back(i*i);
+            primos.emplace_back(i*i);
         }
 }
 void solve()

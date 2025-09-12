@@ -42,3 +42,24 @@ main()
 {
     INI query solve();
 }
+
+
+#include <bits/stdc++.h>
+#define ull unsigned long long
+using namespace std;
+void solve(){
+    ull a, b, ab;cin>>a>>b;
+    if(a==1) ab=b*b;
+    else if(__gcd(a,b)==1)ab=a*b;
+    else if(float(b%a)==0) ab=(b/a)*(b/a)*a;
+    else ab=a*b/(__gcd(a,b));
+    cout<<ab<<"\n";
+    return;
+}
+main(){
+    int t;cin>>t;while(t--)solve();
+}
+
+
+
+

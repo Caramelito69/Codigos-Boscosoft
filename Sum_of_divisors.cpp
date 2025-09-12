@@ -20,13 +20,13 @@ void solve()
     ll n;
     cin>>n;
     ll s=0;
-    for (ll d=1; d<=n;)
+    for (ll i=1;i<=n;)
     {
-        ll k=n/d;
+        ll k=n/i;
         ll r=n/k;
-        ll c=(k%m*suma(d,r))%m;
+        ll c=(k%m*suma(i,r))%m;
         s=(s+c)%m;
-        d=r+1;
+        i=r+1;
     }
     cout<<s<<endl;
 }
