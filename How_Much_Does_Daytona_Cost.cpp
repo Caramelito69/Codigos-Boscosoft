@@ -10,18 +10,18 @@ using namespace std;
 #define rall(v) v.rbegin(),v.rend()
 #define F first
 #define S second
+#define reads(n) string n;cin>>n;
 #define ii pair<ll,ll>
-#define vi vector<ll>
+#define vi vector<int>
 #define vs vector<string>
 #define vii vector<ii>
-#define viii vector<ll,ii>
-#define reads(s) string s;cin>>s;
+#define viii vector<int,ii>
 #define readv(vec,a) readi(a) vi vec(a);for(auto &e:vec)cin>>e;
-#define printv(vec) for(auto &e:vec)cout<<e<<' ';cout<<endl;
-#define dbg(v) cout<<#v<<' '<<v<<endl;
-#define endl '\n'
+#define printv(vec,a) for(auto &e:vec)cout<<e<<' ';cout<<endl;
 #define pb push_back
 #define eb emplace_back
+#define dbg(v) cout<<#v<<' '<<v<<endl;
+#define endl '\n'
 #define sum(n) (n)*((n)+1)/2
 #define aureo (1+sqrt(5))/2
 #define fibo(n) (pow(aureo,n)-pow(1-aureo,n))/(sqrt(5))
@@ -30,31 +30,14 @@ typedef unsigned long long ull;
 const ll inf=numeric_limits<ll>::max();
 void solve()
 {
-    unordered_map<ll,ll>mapa;
     readi(n)
-    ll s=0,may=0;
-    fore(i,1,n)
-    {
-        readi(a);
-        may=max(may,a);
-        mapa[a]++;
-    }
-    vi dp(may+1);
-    if(may>=1)
-        dp[1]=mapa[1];
-    printv(dp)
-    fore(i,2,may)
-    {
-        ll g=i*mapa[i];
-        ll s=dp[i-2]+g;
-        ll sf=dp[i-1];
-        dp[i]=max(sf,s);
-    }
-    cout<<dp[may];
-//11
-//1 2 1 3 2 2 2 2 3 5 5
+    readi(k)
+    vi vec(n);
+    for(auto &e:vec)cin>>e;
+    auto e=find(all(vec),k);
+    cout<<(e!=vec.end()?"YES":"NO")<<endl;
 }
 main()
 {
-    INI solve();
+    INI query solve();
 }

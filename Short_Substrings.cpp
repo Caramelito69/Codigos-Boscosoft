@@ -30,31 +30,12 @@ typedef unsigned long long ull;
 const ll inf=numeric_limits<ll>::max();
 void solve()
 {
-    unordered_map<ll,ll>mapa;
-    readi(n)
-    ll s=0,may=0;
-    fore(i,1,n)
-    {
-        readi(a);
-        may=max(may,a);
-        mapa[a]++;
-    }
-    vi dp(may+1);
-    if(may>=1)
-        dp[1]=mapa[1];
-    printv(dp)
-    fore(i,2,may)
-    {
-        ll g=i*mapa[i];
-        ll s=dp[i-2]+g;
-        ll sf=dp[i-1];
-        dp[i]=max(sf,s);
-    }
-    cout<<dp[may];
-//11
-//1 2 1 3 2 2 2 2 3 5 5
+    reads(cad)
+    for(int i=0;i<cad.size();i+=2)
+        cout<<cad[i];
+    cout<<cad[cad.size()-1]<<endl;
 }
 main()
 {
-    INI solve();
+    INI query solve();
 }

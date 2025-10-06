@@ -4,24 +4,23 @@ using namespace std;
 #define int ll
 #define readi(n) int n;cin>>n;
 #define query readi(n) while(n--)
+#define reads(n) string n;cin>>n;
 #define fore(i,a,b) for(int i=a;i<=b;i++)
 #define forei(i,a,b) for(int i=a;i>=b;i--)
 #define all(v) v.begin(),v.end()
 #define rall(v) v.rbegin(),v.rend()
-#define F first
-#define S second
-#define ii pair<ll,ll>
-#define vi vector<ll>
-#define vs vector<string>
+#define ii pair <ll,ll>
+#define vi vector<int>
 #define vii vector<ii>
-#define viii vector<ll,ii>
-#define reads(s) string s;cin>>s;
-#define readv(vec,a) readi(a) vi vec(a);for(auto &e:vec)cin>>e;
-#define printv(vec) for(auto &e:vec)cout<<e<<' ';cout<<endl;
-#define dbg(v) cout<<#v<<' '<<v<<endl;
-#define endl '\n'
+#define viii vector<int,ii>
 #define pb push_back
 #define eb emplace_back
+#define F first
+#define S second
+#define readv(vec,a) readi(a) vi vec(a);for(auto &e:vec)cin>>e;
+#define printv(vec) for(auto &e:vec)cout<<e<<' ';cout<<endl;
+#define endl '\n';
+#define dbg(v) cout<<#v<<' '<<v<<endl;
 #define sum(n) (n)*((n)+1)/2
 #define aureo (1+sqrt(5))/2
 #define fibo(n) (pow(aureo,n)-pow(1-aureo,n))/(sqrt(5))
@@ -30,31 +29,18 @@ typedef unsigned long long ull;
 const ll inf=numeric_limits<ll>::max();
 void solve()
 {
-    unordered_map<ll,ll>mapa;
     readi(n)
-    ll s=0,may=0;
-    fore(i,1,n)
-    {
-        readi(a);
-        may=max(may,a);
-        mapa[a]++;
-    }
-    vi dp(may+1);
-    if(may>=1)
-        dp[1]=mapa[1];
-    printv(dp)
-    fore(i,2,may)
-    {
-        ll g=i*mapa[i];
-        ll s=dp[i-2]+g;
-        ll sf=dp[i-1];
-        dp[i]=max(sf,s);
-    }
-    cout<<dp[may];
-//11
-//1 2 1 3 2 2 2 2 3 5 5
+    string cad=to_string(n*n);
+    string cad1=to_string(n);
+    int d=0;
+    fore(i,cad.size()-(int(log10(n))+1),cad.size()-1)
+        if(cad[i]!=cad1[d++])
+        {
+            cout<<"No.\n";return;
+        }
+    cout<<"Si.\n";
 }
 main()
 {
-    INI solve();
+    INI query solve();
 }

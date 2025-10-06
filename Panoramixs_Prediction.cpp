@@ -3,6 +3,7 @@ using namespace std;
 #define INI cin.tie(0)->sync_with_stdio(0);
 #define int ll
 #define readi(n) int n;cin>>n;
+#define reads(n) string n;cin>>n;
 #define query readi(n) while(n--)
 #define fore(i,a,b) for(int i=a;i<=b;i++)
 #define forei(i,a,b) for(int i=a;i>=b;i--)
@@ -10,51 +11,49 @@ using namespace std;
 #define rall(v) v.rbegin(),v.rend()
 #define F first
 #define S second
-#define ii pair<ll,ll>
-#define vi vector<ll>
+#define ii pair<int,int>
+#define vi vector<int>
 #define vs vector<string>
 #define vii vector<ii>
-#define viii vector<ll,ii>
-#define reads(s) string s;cin>>s;
+#define viii vector<int,ii>
 #define readv(vec,a) readi(a) vi vec(a);for(auto &e:vec)cin>>e;
 #define printv(vec) for(auto &e:vec)cout<<e<<' ';cout<<endl;
-#define dbg(v) cout<<#v<<' '<<v<<endl;
-#define endl '\n'
 #define pb push_back
 #define eb emplace_back
+#define endl '\n'
+#define dbg(v) cout<<#v<<'='<<v<<endl;
 #define sum(n) (n)*((n)+1)/2
 #define aureo (1+sqrt(5))/2
 #define fibo(n) (pow(aureo,n)-pow(1-aureo,n))/(sqrt(5))
 typedef long long ll;
 typedef unsigned long long ull;
 const ll inf=numeric_limits<ll>::max();
+const int tam=100;
+vector<bool>vec;
+unordered_map<int,int>primos;
+void criba()
+{
+    int d=1;
+    vec.assign(tam/2,1);
+    vec[0]=0;
+    for(int i=3;i*i<tam;i+=2)
+        if(vec[i/2])
+            for(int j=i*i;j<tam;j+=2*i)
+                if(vec[j/2])
+                    vec[j/2]=0;
+    primos[2]=d++;
+    for(int j=3;j<tam;j+=2)
+        if(vec[j/2])
+            primos[j]=d++;
+}
 void solve()
 {
-    unordered_map<ll,ll>mapa;
-    readi(n)
-    ll s=0,may=0;
-    fore(i,1,n)
-    {
-        readi(a);
-        may=max(may,a);
-        mapa[a]++;
-    }
-    vi dp(may+1);
-    if(may>=1)
-        dp[1]=mapa[1];
-    printv(dp)
-    fore(i,2,may)
-    {
-        ll g=i*mapa[i];
-        ll s=dp[i-2]+g;
-        ll sf=dp[i-1];
-        dp[i]=max(sf,s);
-    }
-    cout<<dp[may];
-//11
-//1 2 1 3 2 2 2 2 3 5 5
+    readi(a)
+    readi(b)
+    cout<<(primos[a]+1==primos[b]?"YES":"NO");
 }
 main()
 {
+    criba();
     INI solve();
 }
