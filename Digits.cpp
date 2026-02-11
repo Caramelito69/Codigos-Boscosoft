@@ -1,14 +1,20 @@
 #include<bits/stdc++.h>
 #define INI cin.tie(0)->sync_with_stdio(0);
-#define query int n;cin>>n;while(n--)
-#define fore(i,a,b) for(int i=a;i<=b;i++)
-#define forei(i,a,b) for(int i=a;i>=b;i--)
-#define all(v) v.begin(),v.end()
-#define rall(v) v.rbegin(),v.rend()
-#define par pair<ll,ll>
-#define vecpar vector<par>
-#define dbg(v) cout<<#v<<'='<<v<<endl;
-#define endl '\n'
+#define int ll
+#define forn(i,n) for(int i = 0; i < int(n); i++)
+#define forsn(i,s,n) for(int i = int(s); i < int(n); i++)
+#define forit(i, str) for(auto i = str.begin(); i != str.end(); i++)
+#define dbg(x) cerr << #x << " = " << (x) << endl
+#define all(v) (v).begin(),(v).end()
+#define FastIO ios_base::sync_with_stdio(false); cin.tie(NULL)
+#define ii pair<int,int>
+#define vi vector<int>
+#define F first
+#define S second
+#define pb push_back
+#define pf push_front
+#define mp make_pair
+#define el "\n"
 typedef long long ll;
 typedef unsigned long long ull;
 using namespace std;

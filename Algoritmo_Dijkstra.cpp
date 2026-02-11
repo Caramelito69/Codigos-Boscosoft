@@ -49,15 +49,7 @@ void solve()
     }
     vector<ll>dist=dijkstra(n,vec);
     fore(i,1,n)
-    {
         cout<<dist[i]<<" ";
-    }
-//5 4
-//1 2 3
-//2 3 4
-//3 4 7
-//5 4 8
-//Salida: 0 3 7 14 9223372036854775807(infinito)
 }
 main()
 {

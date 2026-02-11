@@ -92,8 +92,7 @@ ll expo(ll base,ll exp)
     while(exp>0)
     {
         if(exp&1)res=(res*base)%MOD;
-        base=(base*base)%MOD;
-        exp/=2;
+        base=(base*base)%MOD,exp/=2;
     }
     return res;
 }
