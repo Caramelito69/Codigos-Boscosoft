@@ -82,13 +82,127 @@ ll randint(ll a,ll b)
 }
 struct ST
 {
+    int n;
+    vector<int>arbol,lzAdd,lzSet;
+    vector<bool>ban;
+    ST(int sz)
+    {
+        n=sz;
+        arbol.assign(4*n+5,0);
+        lzAdd.assign(4*n+5,0);
+        lzSet.assign(4*n+5,0);
+        ban.assign(4*n+5,false);
+    }
+    void build(int nodo,int ini,int fin,vector<int>&vec)
+    {
+        if(ini==fin)
+        {
+            arbol[nodo]=vec[ini];
+            return;
+        }
+        int mid=(ini+fin)/2;
+        build(2*nodo,ini,mid,vec);//Izquierdo
+        build(2*nodo+1,mid+1,fin,vec);//Derecho
+        arbol[nodo]=arbol[2*nodo]+arbol[2*nodo+1];
+    }
+    void push(int nodo,int ini,int fin)
+    {
+        int mid=(ini+fin)/2;
+        int izq=2*nodo;
+        int der=2*nodo+1;
+        if(ban[nodo])
+        {
+            ban[izq]=true,lzSet[izq]=lzSet[nodo],lzAdd[izq]=0;
+            arbol[izq]=lzSet[nodo]*(mid-ini+1);
+            ban[der]=true,lzSet[der]=lzSet[nodo],lzAdd[der]=0;
+            arbol[der]=lzSet[nodo]*(fin-mid);
+            ban[nodo]=false,lzSet[nodo]=0;
+        }
+        if(lzAdd[nodo]>0)
+        {
+            if(ban[izq])lzSet[izq]+=lzAdd[nodo];
+            else lzAdd[izq]+=lzAdd[nodo];
+            arbol[izq]+=lzAdd[nodo]*(mid-ini+1);
 
+            if(ban[der])lzSet[der]+=lzAdd[nodo];
+            else lzAdd[der]+=lzAdd[nodo];
+            arbol[der]+=lzAdd[nodo]*(fin-mid);
+            lzAdd[nodo]=0;
+        }
+    }
+    void update(int nodo,int ini,int fin,int l,int r,int val,int t)
+    {
+        if(ini>r or fin<l)return;
+        if(ini>=l and fin<=r)
+        {
+            if(t==2)
+            {
+                    ban[nodo]=true,lzSet[nodo]=val,lzAdd[nodo]=0;
+                    arbol[nodo]=val*(fin-ini+1);
+            }
+            else
+            {
+                if(ban[nodo])lzSet[nodo]+=val;
+                else lzAdd[nodo]+=val;
+                arbol[nodo]+=val*(fin-ini+1);
+            }
+            return;
+        }
+        push(nodo,ini,fin);
+        int mid=(ini+fin)/2;
+        update(2*nodo,ini,mid,l,r,val,t);
+        update(2*nodo+1,mid+1,fin,l,r,val,t);
+        arbol[nodo]=arbol[2*nodo]+arbol[2*nodo+1];
+    }
+    void mostrar()
+    {
+        for(auto e:arbol)
+            cout<<(e<10?" ":"")<<e<<' ';
+        cout<<endl;
+        for(int i=0;i<4*n+5;i++)
+            cout<<(i<10?" ":"")<<i<<' ';
+    }
+    int query(int nodo,int ini,int fin,int l,int r)
+    {
+         if(ini>r or fin<l)return 0;
+         if(ini>=l and fin<=r) return arbol[nodo];
+         push(nodo,ini,fin);
+         int mid=(ini+fin)/2;
+         return query(2*nodo,ini,mid,l,r)+query(2*nodo+1,mid+1,fin,l,r);
+    }
+    void add(int l,int r,int val){update(1,0,n-1,l,r,val,1);}
+    void set(int l,int r,int val){update(1,0,n-1,l,r,val,2);}
+    int suma(int l,int r){return query(1,0,n-1,l,r);}
 };
 void solve()
 {
-
+    int n,q;
+    cin>>n>>q;
+    vi vec(n);
+    for(auto &e:vec)cin>>e;
+    ST st(n);
+    st.build(1,0,n-1,vec);
+    while(q--)
+    {
+        int t;cin>>t;
+        if(t==1)
+        {
+            int l,r,x;cin>>l>>r>>x;
+            st.add(l-1,r-1,x);
+        }
+        else if(t==2)
+        {
+             int l,r,x;cin>>l>>r>>x;
+             st.set(l-1,r-1,x);
+        }
+        else
+        {
+            int l,r;cin>>l>>r;
+            cout<<st.suma(l-1,r-1)<<endl;
+        }
+    }
 }
 main()
 {
-    INI solve();
+    solve();
 }
